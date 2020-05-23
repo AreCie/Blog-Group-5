@@ -1,0 +1,52 @@
+﻿@using Blog.Models.DBModel;
+@model List<Articles>
+@{
+    ViewBag.Title = "杨青博客Test";
+    Layout = "~/Views/Shared/_layoutFront.cshtml";
+}
+<article>
+    <aside>
+        <div class="l_box" id="stickMe">
+            <div class="about_me">
+                @Html.Action("AboutMe", "PartialView")
+            </div>
+            <div class="wdxc">
+                @Html.Action("MyGallery", "PartialView")
+            </div>
+            <div class="search">
+                @Html.Action("SelKey", "PartialView")
+            </div>
+            <div class="fenlei">
+                @Html.Action("ArtSort", "PartialView")
+            </div>
+            <div class="tuijian">
+                @Html.Action("EtcRec", "PartialView")
+            </div>
+            <div class="links">
+                <h2>友情链接</h2>
+                <ul>
+                    <a href="http://www.yangqq.com">杨青个人博客</a>
+                    <a href="http://www.yangqq.com">杨青博客</a>
+                </ul>
+            </div>
+            <div class="guanzhu">
+                <h2>关注我 么么哒</h2>
+                <ul>
+                    <img src="~/Assets/images/wx.jpg">
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <div class="r_box">
+        <main>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <i><a href="/"><img src="~/Assets/@item.MainPicUrl"></a></i>
+                    <h3><a href="~/Home/Detail/@item.Id">@item.Title</a></h3>
+                    <p>@item.SimpleInfo</p>
+                </li>
+            }
+        </main>
+    </div>
+</article>

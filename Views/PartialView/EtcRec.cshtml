@@ -1,0 +1,16 @@
+﻿@using Blog.Models.DBModel
+@model List<Articles>
+<h2>站长推荐</h2>
+<ul>
+    @foreach (var item in this.Model)
+    {
+        if (item.ShowType == "相册")
+        {
+            <li><a href="~/Share/Detail/@item.Id">@item.Title</a></li>
+        }
+        else
+        {
+            <li><a href="~/Home/Detail/@item.Id">@item.Title</a></li>
+        }
+    }
+</ul>

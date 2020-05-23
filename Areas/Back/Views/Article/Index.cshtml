@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Areas/Back/Assets/lib/layui/css/layui.css" rel="stylesheet" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="layui-form-item" style="margin-top: 10px; margin-left:10px">
+        <div class="layui-input-inline" style="width:100px;">
+            <button class="layui-btn" id="add" data-type="reload">新增文章</button>
+        </div>
+        <form class="layui-form" method="post" onsubmit="return false;">
+
+            <label class="layui-form-mid">标题:</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input type="text" id="title" name="title" autocomplete="off" class="layui-input">
+            </div>
+            <label class="layui-form-mid">发布时间:</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <input type="text" name="begin" id="begin" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+            </div>
+
+            <label class="layui-form-mid">类别:</label>
+            <div class="layui-input-inline" style="width:100px;">
+                <select id="cc" name="dept">
+                    <option value="">请选择</option>
+                    <option value="">文艺</option>
+                    <option value="">日记</option>
+                </select>
+            </div>
+
+            <div class="layui-input-inline" style="width:100px;">
+                <button class="layui-btn" id="search" data-type="reload">搜索</button>
+            </div>
+        </form>
+    </div>
+
+    <table class="layui-hide" id="demo" lay-filter="test"></table>
+
+    <script src="~/Areas/Back/Assets/lib/layui/layui.js"></script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+    <script>
+        layui.use(['table','layer','laypage','laydate'], function () {
+            var table = layui.table,
+                layer = layui.layer,
+                laydate = layui.laydate,
+                $ = layui.$;
+
+            //执行一个 table 实例
+            table.render({
+                elem: '#demo'
+                , height: 515
+                , url: '/Back/Article/GetArticlePage' //数据接口
+                , title: '文章表'
+                , page: true //开启分页
+                , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+                , cols: [[ //表头
+                      { type: 'checkbox', fixed: 'left' }
+                    , { field: 'Title', title: '标题', width: 200 }
+                    , { field: 'MainPicUrl', title: '图片', width: 100, templet: '<div><img src="/Assets/{{d.MainPicUrl}}" /></div>' }
+                    , { field: 'ReadTimes', title: '阅读次数', width:120, sort:true }
+                    , { field: 'Tags', title: '标签', width: 100 }
+                    , { field: 'Source', title: '来源', width: 80}
+                    , { field: 'Type', title: '类型', width: 100 }
+                    , { field: 'CreateTimeStr', title: '创建时间', width: 180 }
+                    , { fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo' }
+                ]]
+            });
+
+            $("#add").click(function () {
+                index=layer.open({
+                    type: 2,
+                    content: '/Back/Article/AddArticle',
+                    area:["1200px","600px"]
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

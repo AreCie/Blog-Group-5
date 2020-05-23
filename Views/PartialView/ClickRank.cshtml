@@ -1,0 +1,9 @@
+﻿@using Blog.Models.DBModel
+@model List<Articles>
+<h2>点击排行</h2>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li><a href="~/Home/Detail/@item.Id">@item.Title</a></li>
+    }
+</ul>

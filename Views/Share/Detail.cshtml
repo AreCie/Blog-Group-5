@@ -1,0 +1,109 @@
+﻿@using Blog.Models.DBModel
+@model Articles
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_layoutFront.cshtml";
+}
+<script src="~/Assets/js/jquery.min.js" type="text/javascript"></script>
+<article>
+    <aside>
+        <div class="l_box">
+            <div class="about_me">
+                @Html.Action("AboutMe", "PartialView")
+            </div>
+            <div class="wdxc">
+                @Html.Action("MyGallery", "PartialView")
+            </div>
+            <div class="guanzhu">
+                <h2>关注我 么么哒</h2>
+                <ul>
+                    <img src="~/Assets/images/wx.jpg">
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <div class="picsbox">
+        <main>
+            <div class="bodymodal"></div>
+            <!--播放到第一张图的提示-->
+            <div class="firsttop">
+                <div class="firsttop_right">
+                    <div class="close2"> <a class="closebtn1" title="关闭" href="javascript:void(0)"></a> </div>
+                    <div class="replay">
+                        <h2 id="div-end-h2"> 已到第一张图片了。 </h2>
+                        <p> <a class="replaybtn1" href="javascript:;">重新播放</a> </p>
+                    </div>
+                </div>
+            </div>
+            <!--播放到最后一张图的提示-->
+            <div class="endtop">
+                <div class="firsttop_right">
+                    <div class="close2"> <a class="closebtn2" title="关闭" href="javascript:void(0)"></a> </div>
+                    <div class="replay">
+                        <h2 id="H1"> 已到最后一张图片了。 </h2>
+                        <p> <a class="replaybtn2" href="javascript:;">重新播放</a> </p>
+                    </div>
+                </div>
+            </div>
+            <!--弹出层结束-->
+            <!--图片特效内容开始-->
+            <div class="piccontext">
+                <h2>@Model.Title</h2>
+                <div class="source">
+                    <div class="source_left"><span>@Model.PubTime</span> </div>
+                    <div class="source_right"> <a href="javascript:;" class="list">列表查看</a> </div>
+                    <div class="source_right1"> <a href="javascript:;" class="gaoqing">高清查看</a> </div>
+                </div>
+                <!--大图展示-->
+                <div class="picshow">
+                    <div class="picshowtop"> <a href="#"><img style="width:640px;height:430px" src="" alt="" id="pic1" curindex="0" /></a> <a id="preArrow" href="javascript:void(0)" class="contextDiv" title="上一张"><span id="preArrow_A"></span></a> <a id="nextArrow" href="javascript:void(0)" class="contextDiv" title="下一张"><span id="nextArrow_A"></span></a> </div>
+                    <div class="picshowtxt">
+                        <div class="picshowtxt_left"><span>1</span>/<i>@Model.PhoLis.Count</i></div>
+                        <div class="picshowtxt_right"></div>
+                    </div>
+                    <div class="picshowlist">
+                        <div class="picshowlist_mid">
+                            <div class="picmidleft"> <a href="javascript:void(0)" id="preArrow_B"><span class="sleft"></span></a> </div>
+                            <div class="picmidmid">
+                                <ul>
+                                    @foreach (var item in Model.PhoLis)
+                                    {
+                                        <li><a href="javascript:void(0);"><img src="~/Assets/@item.PicUrl" alt="" bigimg="~/Assets/@item.PicUrl" text="@item.PicCont" /></a></li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="picmidright"> <a href="javascript:void(0)" id="nextArrow_B"><span class="sright"></span></a> </div>
+                        </div>
+                    </div>
+                </div>
+                <!--列表展示-->
+                <div class="piclistshow">
+                    <ul>
+                        @foreach (var item in Model.PhoLis)
+                        {
+                            <li>
+                                <div class="picimg"><img style="width:640px" src="~/Assets/@item.PicUrl" alt="" /></div>
+                                <div class="pictxt">
+                                    <h3>@item.PicCont<span>(@(Model.PhoLis.IndexOf(item)+1)/@Model.PhoLis.Count)</span></h3>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            <div class="pictext">
+                <ul>
+                    @Model.Cont
+                </ul>
+            </div>
+            <div class="share">
+                <p class="diggit">
+                    <a href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');"> 很赞哦！ </a>(<b id="diggnum">
+                        <script type="text/javascript" src="/e/public/ViewClick/?classid=2&id=20&down=5"></script>13
+                    </b>)
+                </p>
+            </div>
+        </main>
+    </div>
+</article>

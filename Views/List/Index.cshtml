@@ -1,0 +1,46 @@
+﻿@using Blog.Models.DBModel
+@model List<Articles>
+@{
+    ViewBag.Title = "我的日记";
+    Layout = "~/Views/Shared/_layoutFront.cshtml";
+}
+<article>
+    <aside>
+        <div class="l_box">
+            <div class="search">
+                @Html.Action("SelKey", "PartialView")
+            </div>
+            <div class="fenlei">
+                @Html.Action("ArtSort", "PartialView")
+            </div>
+            <div class="tuijian">
+                @Html.Action("EtcRec", "PartialView")
+            </div>
+            <div class="tuijian">
+                @Html.Action("ClickRank", "PartialView")
+            </div>
+            <div class="cloud">
+                @Html.Action("CloudTags", "PartialView")
+            </div>
+            <div class="guanzhu">
+                <h2>关注我 么么哒</h2>
+                <ul>
+                    <img src="~/Assets/images/wx.jpg">
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <div class="r_box">
+        <main>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <i><a href="~/List/Detail/@item.Id"><img src="~/Assets/@item.MainPicUrl"></a></i>
+                    <h3><a href="~/List/Detail/@item.Id">@item.Title</a></h3>
+                    <p>@item.SimpleInfo</p>
+                </li>
+            }
+            <div class="pagelist"><a class="allpage"><b>99</b></a>&nbsp;&nbsp;<a href="#" class="curPage">1</a>&nbsp;&nbsp;<a href="#" onclick="page(2)">2</a>&nbsp;&nbsp;<a href="#" onclick="page(3)">3</a>&nbsp;&nbsp;<a href="#" onclick="page(4)">4</a>&nbsp;&nbsp;<a href="#" onclick="page(5)">5</a>&nbsp;&nbsp;<a href="#" onclick="page(6)">6</a>&nbsp;&nbsp;<a href="#" onclick="page(7)">7</a>&nbsp;&nbsp;<a href="#" onclick="page(8)">8</a>&nbsp;&nbsp;<a href="#" onclick="page(9)">9</a>&nbsp;&nbsp;<a href="#" onclick="page(2)">下一页</a></div>
+        </main>
+    </div>
+</article>

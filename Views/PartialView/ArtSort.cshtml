@@ -1,0 +1,9 @@
+﻿@using Blog.Models.DBModel
+@model List<Articles>
+<h2>文章分类</h2>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li><a href="~/Home/Index/?Type=@item.Type">@item.Type（@item.Sum）</a></li>
+    }
+</ul>
