@@ -14,6 +14,7 @@ namespace Blog.Areas.Back.Controllers
             return View();
         }
 
+        //登录页面
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Login()
@@ -21,6 +22,7 @@ namespace Blog.Areas.Back.Controllers
             return View();
         }
 
+        //登录
         [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(string Name, string Pass)
@@ -44,10 +46,8 @@ namespace Blog.Areas.Back.Controllers
                 return Json(new UIResult(400, "用户名不存在"));
             }
         }
-        /// <summary>
-        /// 安全退出
-        /// </summary>
-        /// <returns></returns>
+
+        //安全退出
         public ActionResult LoginOut()
         {
             FormsAuthentication.SignOut();
